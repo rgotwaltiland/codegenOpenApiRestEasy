@@ -1,0 +1,70 @@
+openapi: "3.0.0"
+
+info:
+  title: iLand Secure Cloud Search
+  version: 1.0.0
+  description: APIs for performing searches within the iLand Secure Cloud.
+  termsOfService: TODO
+  contact:
+    name: TODO-ContactName
+    email: TODO@TODO.TODO
+    url: TODO
+  license:
+    name: TODO-LicenceName
+    url: TODO-LicenceURL
+
+tags:
+  - name: Organization
+    description: The highest level in the company architecture.
+    externalDocs:
+      description: The Confluence page describing the architecture
+      url: TODO-LongAndUgly
+
+paths:
+  /org/{orgUuid}/search:
+    summary: TODO-ProbablyUnnecessary
+    description: TODO-ProbablyUnnecessary
+    #ref and servers are also possible here
+    get:
+      summary: Search within an organization.
+      description: |
+        Searches within the organization with the given `orgUuid` for a provided query string (given as the `query` query parameter).
+        The query string should follow Lucene style (see TODO-PrettyLink).
+        Use of the wildcard `*` in the query string is permitted with the exclusion of the first character.
+        The use of `AND` can be employed in the query string to return only results where both/all conditions are true.
+        The returned search results can be paged using the `offset` and `limit` query parameters.
+        The `limit` is defaulted to 10 results with a maximum of 50.
+      tags:
+        - Organization
+      parameters:
+        - in: path
+          name: orgUuid
+          schema:
+            type: string
+          required: true
+          description: The organization UUID within which the search is to be performed.
+        - in: query
+          name: query
+          schema:
+            type: string
+          required: false
+          description: |
+            The query string to execute.
+            Use of the wildcard `*` is permitted except for the first character.
+            Use of `AND` is permitted to indicate both/all conditions must be met.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          required: false
+          description: The offset for paging.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          required: false
+          description: The limit of how many search results to return.
+      responses:
+        200:
+          description: Successful
+      
