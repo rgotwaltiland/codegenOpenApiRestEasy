@@ -67,4 +67,16 @@ paths:
       responses:
         200:
           description: Successful
-      
+    post:
+      tags:
+        - Organization
+      parameters:
+        - in: path
+          name: orgUuid
+          schema:
+            type: string
+          required: true
+          description: The organization UUID within which the search is to be performed.
+      responses:
+        200:
+          description: Successful
